@@ -1,10 +1,19 @@
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Navbar from "./components/navbar/Navbar";
+import PageContainer from './containers/PageContainer';
 function App() {
   return (
-    <div className="bg-red-700">
-      Hello world!
-    </div>
+    <PageContainer>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}>
+          </Route>
+        </Routes>
 
+      </BrowserRouter >
+    </PageContainer>
   );
 }
 
