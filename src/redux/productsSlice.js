@@ -13,6 +13,12 @@ export const getProducts = createAsyncThunk('products/getProducts', async () => 
     const data = response.json();
     return data;
 })
+export const getCategoryProducts = createAsyncThunk('products/getCategoryProducts', async (category) => {
+    const response = await fetch(`https://fakestoreapi.com/products/category/${category}`)
+    const data = response.json();
+    return data;
+})
+
 
 export const getDetailProduct = createAsyncThunk('product/getDetailProduct', async (id) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`)
@@ -34,6 +40,16 @@ export const productsSlice = createSlice({
                 state.products = action.payload
             })
             .addCase(getProducts.rejected, (state, action) => {
+                state.productsStatus = STATUS.FAIL;
+            })
+            .addCase(getCategoryProducts.pending, (state, action) => {
+                state.productsStatus = STATUS.LOADING;
+            })
+            .addCase(getCategoryProducts.fulfilled, (state, action) => {
+                state.productsStatus = STATUS.SUCCESS;
+                state.products = action.payload
+            })
+            .addCase(getCategoryProducts.rejected, (state, action) => {
                 state.productsStatus = STATUS.FAIL;
             })
             .addCase(getDetailProduct.pending, (state, action) => {
