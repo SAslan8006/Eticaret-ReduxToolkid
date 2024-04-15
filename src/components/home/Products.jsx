@@ -27,9 +27,6 @@ const Products = ({ category, sort }) => {
         setItemOffset(newOffset);
     };
 
-
-    console.log(products)
-    console.log(productsStatus)
     useEffect(() => {
         if (category) {
             dispatch(getCategoryProducts(category))
